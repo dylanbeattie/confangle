@@ -22,9 +22,8 @@ get '/' do
     redirect to('/oauth2callback')
   end
   client_opts = JSON.parse(session[:credentials])
-  client_opts
-
-  # auth_client = Signet::OAuth2::Client.new(client_opts)
+  auth_client = Signet::OAuth2::Client.new(client_opts)
+  auth_client.to_json
   # sheets = Google::Apis::SheetsV4::SheetsService.new
   # spreadsheet_id = '1W900gpmm-qMWf0a9hcM1RuEGKitL_vtd5_Uf-QR_A0E'
   # range = '2018 CFP !A1:EG'
