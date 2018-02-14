@@ -6,6 +6,7 @@ require 'google/apis/sheets_v4'
 require 'googleauth'
 require 'googleauth/stores/file_token_store'
 require 'fileutils'
+require "bundler/setup"
 
 enable :sessions
 set :session_secret, 'df0978as9d8fy9a8sdfy9asdf9a8sdyf9a8sd98y98yioadsfya978'
