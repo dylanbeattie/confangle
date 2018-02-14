@@ -1,0 +1,9 @@
+html { font-family: Arial; }
+table { border-collapse: collapse; }
+table tr td, table tr th { border: 1px solid #000; padding: 8px; }
+@media print {
+    dl {page-break-after: always;}
+}
+dl { position: relative; margin: 20px; }
+dt { position: absolute; left: 0px; font-weight: bold; clear: both; margin-top: 00px; }
+dd { margin-left: 300px; margin-bottom: 20px; }

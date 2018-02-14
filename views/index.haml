@@ -1,0 +1,17 @@
+%html
+  %head
+    %link(rel="stylesheet" type="text/css" href="/styles.css")
+    %title
+      FullStack 2018 CFP
+  %body
+    %table
+      %tr
+      -headings.each do |heading|
+        %th
+          =heading
+      -sessions.each do |session|
+        %tr
+        -session.each do |thing|
+          %td
+            =thing
+
