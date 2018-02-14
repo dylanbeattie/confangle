@@ -5,8 +5,8 @@ require 'sinatra'
 require 'google/apis/sheets_v4'
 require 'googleauth'
 require 'googleauth/stores/file_token_store'
-
 require 'fileutils'
+
 enable :sessions
 set :session_secret, 'df0978as9d8fy9a8sdfy9asdf9a8sdyf9a8sd98y98yioadsfya978'
 set :public_folder, 'public'
@@ -21,15 +21,7 @@ get '/' do
   unless session.has_key?(:credentials)
     redirect to('/oauth2callback')
   end
-
   client_opts = JSON.parse(session[:credentials])
-  # auth_client = Signet::OAuth2::Client.new(client_opts)
-  # drive = Google::Apis::DriveV2::DriveService.new
-  # files = drive.list_files(options: { authorization: auth_client })
-  # "<pre>#{JSON.pretty_generate(files.to_h)}</pre>"
-  #
-  #
-  # client_opts = JSON.parse(session[:credentials])
   auth_client = Signet::OAuth2::Client.new(client_opts)
   sheets = Google::Apis::SheetsV4::SheetsService.new
   spreadsheet_id = '1W900gpmm-qMWf0a9hcM1RuEGKitL_vtd5_Uf-QR_A0E'
@@ -40,26 +32,13 @@ get '/' do
   sessions_range = '2018 CFP !A2:S'
   sessions_response = sheets.get_spreadsheet_values(spreadsheet_id, sessions_range, options: {authorization: auth_client})
   haml :talk_per_page, :locals => { headings: headings_response.values[0], sessions: sessions_response.values }
-
-  # # output  # service = Google::Apis::SheetsV4::SheetsService.new
-  # # service.client_options.application_name = APPLICATION_NAME
-  # # service.authorization = client_opts
-  # #
-  # # # Prints the names and majors of students in a sample spreadsheet:
-  # # # https://docs.google.com/spreadsheets/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms/edit
-  # # spreadsheet_id = '1W900gpmm-qMWf0a9hcM1RuEGKitL_vtd5_Uf-QR_A0E'
-  # # range = '2018 CFP!A1:E'
-  # # response = service.get_spreadsheet_values(spreadsheet_id, range)
-  # # output = "<pre>"
-  # # response.values.each do |row|
-  # #   # Print columns A and E, which correspond to indices 0 and 4.
-  # #   output += "#{row[0]}, #{row[4]}"
-  # # end
-  # output
 end
 
 get '/oauth2callback' do
-  client_secrets = Google::APIClient::ClientSecrets.load
+  client_secrets_json = ENV['GOOGLE_CLIENT_SECRETS'] || File.read("client_secrets.json")
+
+  client_secrets = Google::APIClient::ClientSecrets.new(JSON.parse(client_secrets_json))
+
   auth_client = client_secrets.to_authorization
   auth_client.update!(
       :scope => Google::Apis::SheetsV4::AUTH_SPREADSHEETS, # 'https://www.googleapis.com/auth/drive.metadata.readonly',
