@@ -26,14 +26,12 @@ get '/' do
   auth_client.to_json
   sheets = Google::Apis::SheetsV4::SheetsService.new
   spreadsheet_id = '1W900gpmm-qMWf0a9hcM1RuEGKitL_vtd5_Uf-QR_A0E'
-  # range = '2018 CFP !A1:EG'
-  # response = sheets.get_spreadsheet_values(spreadsheet_id, range, options: {authorization: auth_client})
   headings_range = '2018 CFP !A1:S1'
   headings_response = sheets.get_spreadsheet_values(spreadsheet_id, headings_range, options: {authorization: auth_client})
   headings_response.to_json
-    # sessions_range = '2018 CFP !A2:S'
-  # sessions_response = sheets.get_spreadsheet_values(spreadsheet_id, sessions_range, options: {authorization: auth_client})
-  # haml :talk_per_page, :locals => { headings: headings_response.values[0], sessions: sessions_response.values }
+  sessions_range = '2018 CFP !A2:S'
+  sessions_response = sheets.get_spreadsheet_values(spreadsheet_id, sessions_range, options: {authorization: auth_client})
+  haml :talk_per_page, :locals => { headings: headings_response.values[0], sessions: sessions_response.values }
 end
 
 get '/oauth2callback' do

@@ -22,6 +22,8 @@ GEM
       multi_json (~> 1.11)
       os (~> 0.9)
       signet (~> 0.7)
+    hoe (3.16.2)
+      rake (>= 0.8, < 13.0)
     httpclient (2.8.3)
     jwt (1.5.6)
     little-plugger (1.1.4)
@@ -40,6 +42,7 @@ GEM
     rack (2.0.4)
     rack-protection (2.0.0)
       rack
+    rake (12.3.0)
     representable (3.0.4)
       declarative (< 0.1.0)
       declarative-option (< 0.2.0)
@@ -55,6 +58,9 @@ GEM
       rack (~> 2.0)
       rack-protection (= 2.0.0)
       tilt (~> 2.0)
+    sinatra-haml (0.1.1)
+      hoe (>= 1.4.0)
+      sinatra (> 0.1.7)
     tilt (2.0.8)
     uber (0.1.0)
 
@@ -64,6 +70,7 @@ PLATFORMS
 DEPENDENCIES
   google-api-client
   sinatra
+  sinatra-haml
 
 BUNDLED WITH
    1.16.0
