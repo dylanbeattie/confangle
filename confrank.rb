@@ -28,7 +28,6 @@ get '/' do
   spreadsheet_id = '1W900gpmm-qMWf0a9hcM1RuEGKitL_vtd5_Uf-QR_A0E'
   headings_range = '2018 CFP !A1:S1'
   headings_response = sheets.get_spreadsheet_values(spreadsheet_id, headings_range, options: {authorization: auth_client})
-  headings_response.to_json
   sessions_range = '2018 CFP !A2:S'
   sessions_response = sheets.get_spreadsheet_values(spreadsheet_id, sessions_range, options: {authorization: auth_client})
   haml :talk_per_page, :locals => { headings: headings_response.values[0], sessions: sessions_response.values }
