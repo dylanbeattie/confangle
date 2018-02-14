@@ -34,6 +34,11 @@ get '/' do
   haml :talk_per_page, :locals => { headings: headings_response.values[0], sessions: sessions_response.values }
 end
 
+get '/config_dump' do
+  client_secrets_json = ENV['GOOGLE_CLIENT_SECRETS'] || File.read("client_secrets.json")
+  client_secrets_json
+end
+
 get '/oauth2callback' do
   client_secrets_json = ENV['GOOGLE_CLIENT_SECRETS'] || File.read("client_secrets.json")
 
