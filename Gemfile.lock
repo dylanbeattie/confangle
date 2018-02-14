@@ -22,6 +22,9 @@ GEM
       multi_json (~> 1.11)
       os (~> 0.9)
       signet (~> 0.7)
+    haml (5.0.4)
+      temple (>= 0.8.0)
+      tilt
     hoe (3.16.2)
       rake (>= 0.8, < 13.0)
     httpclient (2.8.3)
@@ -61,6 +64,7 @@ GEM
     sinatra-haml (0.1.1)
       hoe (>= 1.4.0)
       sinatra (> 0.1.7)
+    temple (0.8.0)
     tilt (2.0.8)
     uber (0.1.0)
 
@@ -69,6 +73,7 @@ PLATFORMS
 
 DEPENDENCIES
   google-api-client
+  haml
   sinatra
   sinatra-haml
 

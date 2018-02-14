@@ -6,7 +6,6 @@ require 'google/apis/sheets_v4'
 require 'googleauth'
 require 'googleauth/stores/file_token_store'
 require 'fileutils'
-require "bundler/setup"
 
 enable :sessions
 set :session_secret, 'df0978as9d8fy9a8sdfy9asdf9a8sdyf9a8sd98y98yioadsfya978'
@@ -42,7 +41,8 @@ get '/oauth2callback' do
   auth_client = client_secrets.to_authorization
   auth_client.update!(
       :scope => Google::Apis::SheetsV4::AUTH_SPREADSHEETS, # 'https://www.googleapis.com/auth/drive.metadata.readonly',
-      :redirect_uri => url('/oauth2callback'))
+      :redirect_uri => url('/oauth2callback')
+  )
   if request['code'] == nil
     auth_uri = auth_client.authorization_uri.to_s
     redirect to(auth_uri)
