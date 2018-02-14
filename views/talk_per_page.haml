@@ -4,12 +4,23 @@
     %title
       FullStack 2018 CFP
   %body
+    %a(href="/")
+      All Sessions
     -sessions.each do |session|
-      %dl
-        -session.each_with_index do |thing,index|
+      %section
+        %h1
+          =("#" + session['No.'] + ":")
+          =session['Title of Talk/Workshop']
+          (
+          %a(href="?speaker=#{URI.encode(session['Speaker Name'])}")
+            =session['Speaker Name']
+          )
+        %dl
+        -session.each_pair do |key, value|
+          -next if ['Title of Talk/Workshop', 'No.', 'Speaker Name'].include? key
           %dt
-            =headings[index]
+            =key
           %dd
-            =thing
+            =value
             &nbsp
-        %hr
+      %hr

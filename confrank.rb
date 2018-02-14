@@ -21,6 +21,7 @@ get '/' do
   unless session.has_key?(:credentials)
     redirect to('/oauth2callback')
   end
+  speaker = params[:speaker]
   client_opts = JSON.parse(session[:credentials])
   auth_client = Signet::OAuth2::Client.new(client_opts)
   auth_client.to_json
@@ -30,7 +31,17 @@ get '/' do
   headings_response = sheets.get_spreadsheet_values(spreadsheet_id, headings_range, options: {authorization: auth_client})
   sessions_range = '2018 CFP !A2:S'
   sessions_response = sheets.get_spreadsheet_values(spreadsheet_id, sessions_range, options: {authorization: auth_client})
-  haml :talk_per_page, :locals => { headings: headings_response.values[0], sessions: sessions_response.values }
+  sessions = []
+  headings = headings_response.values[0]
+  sessions_response.values.each_with_index do |session|
+    hash = {}
+    session.each_with_index do |thing,index|
+      hash[headings[index]] = thing
+    end
+    next if speaker && hash['Speaker Name'] != speaker
+    sessions.push(hash)
+  end
+  haml :talk_per_page, :locals => { sessions: sessions }
 end
 
 get '/oauth2callback' do
