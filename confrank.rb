@@ -27,9 +27,9 @@ get '/' do
   auth_client.to_json
   sheets = Google::Apis::SheetsV4::SheetsService.new
   spreadsheet_id = '1W900gpmm-qMWf0a9hcM1RuEGKitL_vtd5_Uf-QR_A0E'
-  headings_range = '2018 CFP !A1:S1'
+  headings_range = 'CFP 2019!A1:R1'
   headings_response = sheets.get_spreadsheet_values(spreadsheet_id, headings_range, options: {authorization: auth_client})
-  sessions_range = '2018 CFP !A2:S'
+  sessions_range = 'CFP 2019!A2:R'
   sessions_response = sheets.get_spreadsheet_values(spreadsheet_id, sessions_range, options: {authorization: auth_client})
   sessions = []
   headings = headings_response.values[0]
@@ -38,7 +38,7 @@ get '/' do
     session.each_with_index do |thing,index|
       hash[headings[index]] = thing
     end
-    next if speaker && hash['Speaker Name'] != speaker
+    next if speaker && hash['Name'] != speaker
     sessions.push(hash)
   end
   haml :talk_per_page, :locals => { sessions: sessions }
@@ -65,3 +65,6 @@ get '/oauth2callback' do
     redirect to('/')
   end
 end
+
+
+# headings are Timestamp	NO	Title of Talk/Workshop	Submission type	Abstract	Audience Level	Themes	Name	E-mail address	Twitter	Phone	Organisation	Location/City	Speaker Bio	First-Time Speaker	Gender	T&L 	Notes									

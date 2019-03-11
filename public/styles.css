@@ -1,9 +1,61 @@
-html { font-family: Arial; }
-table { border-collapse: collapse; }
-table tr td, table tr th { border: 1px solid #000; padding: 8px; }
-@media print {
-    section {page-break-after: always;}
+html {
+  font-family: Arial;
 }
-section { position: relative; margin: 20px; }
-dt { position: absolute; left: 0px; font-weight: bold; clear: both; margin-top: 00px; }
-dd { margin-left: 300px; margin-bottom: 20px; }
+
+span.audience-level {
+  float: right;
+  border: 1px solid #000;
+  padding: 4px;
+  border-radius: 4px;
+}
+
+span.audience-level.intermediate {
+  background-color: #f90;
+}
+
+span.audience-level.beginner {
+  background-color: #3f3;
+}
+
+span.audience-level.advanced {
+  background-color: #3f3;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+table tr td,
+table tr th {
+  border: 1px solid #000;
+  padding: 8px;
+}
+
+section {
+  clear: both;
+}
+
+@media print {
+  section {
+    page-break-after: always;
+  }
+}
+
+dt {
+  float: left;
+  clear: both;
+  font-weight: bold;
+  clear: both;
+  margin-bottom: 5px;
+}
+
+dd {
+  margin-left: 200px;
+  margin-bottom: 5px;
+}
+
+hr {
+  clear: both;
+  border-width: 2px;
+  border-style: solid;
+}

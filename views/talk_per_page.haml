@@ -9,18 +9,24 @@
     -sessions.each do |session|
       %section
         %h1
-          =("#" + session['No.'] + ":")
+          =("#" + session['NO'] + ":")
           =session['Title of Talk/Workshop']
           (
-          %a(href="?speaker=#{URI.encode(session['Speaker Name'])}")
-            =session['Speaker Name']
+          %a(href="?speaker=#{URI.encode(session['Name'])}")
+            =session['Name']
+          =sessions.select { |s| s['Name'] == session['Name'] }.length 
+          talks
           )
-        %dl
-        -session.each_pair do |key, value|
-          -next if ['Title of Talk/Workshop', 'No.', 'Speaker Name'].include? key
-          %dt
-            =key
-          %dd
-            =value
-            &nbsp
+        %p= session['Abstract']
+        %p
+          %strong Themes:
+          =session['Themes']
+          %span(class='audience-level #{session['Audience Level'].split(':')[0].downcase}')
+            =session['Audience Level'].split(':')[0]
+        %p
+          
+        -['Themes', 'Audience Level', 'Submission type',  'E-mail address', 'Twitter', 'Phone', 'Organisation', 'Location/City', 'Speaker Bio', 'First-Time Speaker', 'Gender', 'T&L ', 'Notes'].each do |key|
+          %dt= key
+          %dd= session[key]
       %hr
+    end
