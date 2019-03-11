@@ -13,8 +13,10 @@
     -sessions.each do |session|
       %section
         %h1
-          =("#" + session['NO'] + ":")
-          =session['Title of Talk/Workshop']
+          %a(href="\#session-#{session['NO']}" id="session-#{session['NO']}")
+            =("#" + session['NO'])
+          =":"
+          =session['Title of Talk/Workshop'].gsub(/</, '&lt;').gsub(/>/, '^gt;')
           (
           %a(href="?speaker=#{URI.encode(session['Name'])}")
             =session['Name']
