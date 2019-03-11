@@ -4,8 +4,12 @@
     %title
       FullStack 2018 CFP
   %body
-    %a(href="/")
-      All Sessions
+    -if speaker
+      %h1 
+        Talks by 
+        =speaker
+      %a(href="/")
+        (show all sessions)
     -sessions.each do |session|
       %section
         %h1
@@ -25,8 +29,7 @@
             =session['Audience Level'].split(':')[0]
         %p
           
-        -['Themes', 'Audience Level', 'Submission type',  'E-mail address', 'Twitter', 'Phone', 'Organisation', 'Location/City', 'Speaker Bio', 'First-Time Speaker', 'Gender', 'T&L ', 'Notes'].each do |key|
+        -['Submission type',  'Twitter', 'Organisation', 'Location/City', 'Speaker Bio', 'First-Time Speaker', 'Gender', 'T&L ', 'Notes'].each do |key|
           %dt= key
           %dd= session[key]
       %hr
-    end

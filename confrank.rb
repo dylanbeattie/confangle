@@ -41,7 +41,7 @@ get '/' do
     next if speaker && hash['Name'] != speaker
     sessions.push(hash)
   end
-  haml :talk_per_page, :locals => { sessions: sessions }
+  haml :talk_per_page, :locals => { sessions: sessions, speaker: speaker }
 end
 
 get '/oauth2callback' do
