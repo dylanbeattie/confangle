@@ -21,7 +21,8 @@
           =sessions.select { |s| s['Name'] == session['Name'] }.length 
           talks
           )
-        %p= session['Abstract']
+        %p 
+          =session['Abstract'].gsub(/</, '&lt;').gsub(/>/, '^gt;').gsub(/\n/, '<br/>')
         %p
           %strong Themes:
           =session['Themes']
