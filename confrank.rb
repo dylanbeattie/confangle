@@ -27,9 +27,9 @@ get '/' do
   auth_client.to_json
   sheets = Google::Apis::SheetsV4::SheetsService.new
   spreadsheet_id = '1W900gpmm-qMWf0a9hcM1RuEGKitL_vtd5_Uf-QR_A0E'
-  headings_range = 'CFP 2019!A1:R1'
+  headings_range = 'CFP 2019!A1:T1'
   headings_response = sheets.get_spreadsheet_values(spreadsheet_id, headings_range, options: {authorization: auth_client})
-  sessions_range = 'CFP 2019!A2:R'
+  sessions_range = 'CFP 2019!A2:T'
   sessions_response = sheets.get_spreadsheet_values(spreadsheet_id, sessions_range, options: {authorization: auth_client})
   sessions = []
   headings = headings_response.values[0]
